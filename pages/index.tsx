@@ -40,7 +40,8 @@ const Home: NextPage = () => {
         <h1>Uncertainty Propagation</h1>
         <p>
           Quite possibly the <i>only</i> uncertainty calculator that outputs the
-          relevant \(\LaTeX\)!
+          relevant LaTeX! The author makes no guarantees regarding the accuracy
+          of the results, so use at your own risk.
         </p>
         <input
           type="text"
@@ -91,7 +92,6 @@ const Home: NextPage = () => {
         <input type="text" disabled value="P * V" />
         <input type="text" disabled value="x^2 + y^2 + z^2" />
       </main>
-
       <footer className={styles["footer"]}>Made with ❤️</footer>
     </div>
   );
