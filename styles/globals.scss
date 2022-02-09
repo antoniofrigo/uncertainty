@@ -1,12 +1,35 @@
-@import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --gray-100: #fafafa;
+  --gray-200: #ededed;
+  --gray-300: #e1e1e1;
+  --gray-400: #c7c7c7;
+  --gray-500: #bababa;
+  --gray-600: #aeaeae;
+  --gray-700: #a1a1a1;
+
+  --red-100: #ac274e;
+  --red-200: #a02449;
+  --red-300: #932243;
+  --red-400: #871f3d;
+  --red-500: #6e1932;
+  --red-600: #62162c;
+  --red-700: #551327;
+  --red-800: #491121;
+  --red-900: #3c0e1b;
+
+  --font-stack: "Rubik", sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
+}
 
 html,
 body {
+  background: #ededed;
   padding: 0;
   margin: 0;
-  font-family: "PT Sans", sans-serif, -apple-system, BlinkMacSystemFont,
-    Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
-    Helvetica Neue, sans-serif;
+  font-family: var(--font-stack);
 }
 
 a {
@@ -16,4 +39,12 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+code {
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  background: var(--gray-400);
+  overflow-x: auto;
 }

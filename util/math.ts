@@ -24,7 +24,7 @@ function parseTex(expr: string) {
 function propagate(expr: string) {
   expr = simplify(expr).toString();
   const node = parse(expr);
-  const symbol_list = new Set();
+  const symbol_list: any = new Set();
 
   node.traverse(function (node, path, parent) {
     switch (node.type) {
@@ -41,9 +41,9 @@ function propagate(expr: string) {
   for (let symbol of symbol_list.keys()) {
     const d = derivative(expr, symbol);
     if (d.toString() == "1") {
-      result += `\\left(\\sigma_{${symbol}}\\right)^2`;
+      result += `\\sigma_{${symbol}}^2`;
     } else {
-      result += `\\left((${d.toTex()})\\sigma_{${symbol}}\\right)^2`;
+      result += `\\left(${d.toTex()}\\right)^2\\sigma_{${symbol}}^2`;
     }
 
     if (idx != symbol_list.size - 1) {
@@ -55,6 +55,7 @@ function propagate(expr: string) {
   console.log(result);
   result = result.replaceAll("\\cdot", "");
   result = result.replaceAll("\\_", "_");
+  result = result.replaceAll(" ", "");
   return result;
 }
 

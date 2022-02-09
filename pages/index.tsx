@@ -3,13 +3,23 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "styles/Home.module.scss";
 import propagate from "util/math";
+import copy from "copy-to-clipboard";
+
+declare global {
+  interface window {
+    MathJax: any;
+  }
+}
 
 const Home: NextPage = () => {
   const [equation, setEquation] = useState("");
   const [result, setResult] = useState("");
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    window.MathJax.typeset();
+    setEquation(global.localStorage.getItem("equation") || "");
+    global.window.MathJax.typeset();
+    setCopied(false);
   }, [result]);
 
   return (
@@ -29,30 +39,60 @@ const Home: NextPage = () => {
       <main className={styles["main"]}>
         <h1>Uncertainty Propagation</h1>
         <p>
-          A very basic, yet incredibly useful uncertainty propagation
-          calculator.
+          Quite possibly the <i>only</i> uncertainty calculator that outputs the
+          relevant \(\LaTeX\)!
         </p>
         <input
           type="text"
+          placeholder="Type your equation here"
           value={equation}
-          onChange={(e) => setEquation(e.target.value)}
-        />
-
-        <button onClick={() => setResult("$$" + propagate(equation) + "$$")}>
-          Propagate!
-        </button>
-        <button
-          onClick={() => {
-            window.MathJax.typeset();
+          onChange={(e) => {
+            setEquation(e.target.value);
+            localStorage.setItem("equation", e.target.value);
           }}
-        >
-          Typeset!
-        </button>
+        />
+        <div className={styles["group"]}>
+          <button onClick={() => setResult(propagate(equation))}>
+            Propagate!
+          </button>
+        </div>
         <h2>Result</h2>
-        <p>{result}</p>
+
+        <div className={styles["formula"]}>
+          {result && (
+            <div className={styles["rendered"]}>{"$$ " + result + " $$"}</div>
+          )}
+        </div>
+
+        <code>{result}</code>
+        <div className={styles["group"]}>
+          <button
+            className={styles["small-button"]}
+            onClick={() => {
+              window.MathJax.typeset();
+            }}
+          >
+            Force typeset
+          </button>
+          <button
+            className={styles["small-button"]}
+            onClick={() => {
+              window.MathJax.typeset();
+              setCopied(true);
+              copy(result);
+            }}
+          >
+            {copied ? "Copied!" : "Copy to Clipboard"}
+          </button>
+        </div>
+        <h2>Examples</h2>
+        <input type="text" disabled value="R_1 + R_2" />
+        <input type="text" disabled value="R_1 + 1/(1/R_2 + 1/R_3)" />
+        <input type="text" disabled value="P * V" />
+        <input type="text" disabled value="x^2 + y^2 + z^2" />
       </main>
 
-      <footer></footer>
+      <footer className={styles["footer"]}>Made with ❤️</footer>
     </div>
   );
 };
