@@ -4,12 +4,7 @@ import Head from "next/head";
 import styles from "styles/Home.module.scss";
 import propagate from "util/math";
 import copy from "copy-to-clipboard";
-
-declare global {
-  interface window {
-    MathJax: any;
-  }
-}
+const globalAny: any = global;
 
 const Home: NextPage = () => {
   const [equation, setEquation] = useState("");
@@ -18,7 +13,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     setEquation(global.localStorage.getItem("equation") || "");
-    global.window.MathJax.typeset();
+    (global as any).window.MathJax.typeset();
     setCopied(false);
   }, [result]);
 
@@ -70,7 +65,7 @@ const Home: NextPage = () => {
           <button
             className={styles["small-button"]}
             onClick={() => {
-              window.MathJax.typeset();
+              (window as any).MathJax.typeset();
             }}
           >
             Force typeset
@@ -78,7 +73,7 @@ const Home: NextPage = () => {
           <button
             className={styles["small-button"]}
             onClick={() => {
-              window.MathJax.typeset();
+              (window as any).MathJax.typeset();
               setCopied(true);
               copy(result);
             }}
