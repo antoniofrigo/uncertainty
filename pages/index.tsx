@@ -10,7 +10,7 @@ const Home: NextPage = () => {
   const [equation, setEquation] = useState("");
   const [result, setResult] = useState("");
   const [copied, setCopied] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<any>("");
 
   useEffect(() => {
     setEquation(global.localStorage.getItem("equation") || "");
@@ -54,7 +54,7 @@ const Home: NextPage = () => {
               try {
                 setResult(propagate(equation));
                 setError("");
-              } catch (err) {
+              } catch (err: any) {
                 setError(err);
               }
             }}

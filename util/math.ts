@@ -29,7 +29,9 @@ function propagate(expr: string) {
   node.traverse(function (node, path, parent) {
     switch (node.type) {
       case "SymbolNode":
-        symbol_list.add(node.name);
+        if (node.name != "e") {
+          symbol_list.add(node.name);
+        }
         break;
       default:
         break;
@@ -55,8 +57,6 @@ function propagate(expr: string) {
     idx++;
   }
   result = "\\sqrt{" + result + "}";
-  console.log(result);
-  result = result.replaceAll("\\cdot", "");
   result = result.replaceAll("\\_", "_");
   result = result.replaceAll(" ", "");
   return result;
