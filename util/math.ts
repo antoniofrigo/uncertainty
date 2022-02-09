@@ -58,7 +58,6 @@ function propagate(expr: string) {
   }
   result = "\\sqrt{" + result + "}";
   result = result.replaceAll("\\_", "_");
-  result = result.replaceAll(" ", "");
   return result;
 }
 
