@@ -40,7 +40,10 @@ function propagate(expr: string) {
   let idx = 0;
   for (let symbol of symbol_list.keys()) {
     const d = derivative(expr, symbol);
-    if (d.toString() == "1") {
+    if (d.toString() == "0") {
+      idx++;
+      continue;
+    } else if (d.toString() == "1") {
       result += `\\sigma_{${symbol}}^2`;
     } else {
       result += `\\left(${d.toTex()}\\right)^2\\sigma_{${symbol}}^2`;

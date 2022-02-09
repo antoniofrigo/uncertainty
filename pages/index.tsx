@@ -10,6 +10,7 @@ const Home: NextPage = () => {
   const [equation, setEquation] = useState("");
   const [result, setResult] = useState("");
   const [copied, setCopied] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     setEquation(global.localStorage.getItem("equation") || "");
@@ -48,10 +49,20 @@ const Home: NextPage = () => {
           }}
         />
         <div className={styles["group"]}>
-          <button onClick={() => setResult(propagate(equation))}>
+          <button
+            onClick={() => {
+              try {
+                setResult(propagate(equation));
+                setError("");
+              } catch (err) {
+                setError(err);
+              }
+            }}
+          >
             Propagate!
           </button>
         </div>
+        {error && <div className={styles["error"]}>{error.message}</div>}
         <h2>Result</h2>
 
         <div className={styles["formula"]}>

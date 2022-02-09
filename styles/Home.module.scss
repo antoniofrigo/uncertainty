@@ -41,6 +41,14 @@
     background: var(--red-700);
   }
 
+  .error {
+    background: var(--red-200);
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+  }
+
   .small-button {
     display: flex;
     justify-content: center;
