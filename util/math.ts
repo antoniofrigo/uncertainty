@@ -9,19 +9,52 @@ import {
   SymbolNode,
 } from "mathjs";
 
+function getHash(idx) {
+  return "zqzqz" + String.fromCharCode(65 + idx);
+}
+
 function parseTex(expr: string) {
+  let new_expr = expr;
   const label_list = [];
+  const first_regex = /\\[a-zA-Z0-9]*_{\\?[a-zA-Z0-9\\_]*}/gm;
+  const second_regex = /\\[a-zA-Z0-9]*_\\?[a-zA-Z0-9]*/gm;
+  const third_regex = /\\[a-zA-Z0-9]*/gm;
+
+  const label_set = new Set();
   let i = 0;
-  while (i < expr.length) {
-    let label = "";
-    if (expr[i] == "\\") {
-      label = expr[i];
+
+  const first = [...new_expr.matchAll(first_regex)].map((match) => match[0]);
+  for (const idx in first) {
+    if (!label_set.has(first[idx])) {
+      new_expr = new_expr.replaceAll(first[idx], getHash(i));
+      label_list.push([first[idx], getHash(i)]);
       i++;
     }
   }
+
+  const second = [...new_expr.matchAll(second_regex)].map((match) => match[0]);
+  for (const idx in second) {
+    if (!label_set.has(second[idx])) {
+      new_expr = new_expr.replaceAll(second[idx], getHash(i));
+      label_list.push([second[idx], getHash(i)]);
+      i++;
+    }
+  }
+
+  const third = [...new_expr.matchAll(third_regex)].map((match) => match[0]);
+  for (const idx in third) {
+    if (!label_set.has(third[idx])) {
+      new_expr = new_expr.replaceAll(third[idx], getHash(i));
+      label_list.push([third[idx], getHash(i)]);
+      i++;
+    }
+  }
+
+  return [new_expr, label_list];
 }
 
-function propagate(expr: string) {
+function propagate(the_expr: string) {
+  let [expr, label_list] = parseTex(the_expr);
   expr = simplify(expr).toString();
   const node = parse(expr);
   const symbol_list: any = new Set();
@@ -56,6 +89,11 @@ function propagate(expr: string) {
     }
     idx++;
   }
+
+  for (const idx in label_list) {
+    result = result.replaceAll(label_list[idx][1], label_list[idx][0]);
+  }
+
   result = "\\sqrt{" + result + "}";
   result = result.replaceAll("\\_", "_");
   return result;

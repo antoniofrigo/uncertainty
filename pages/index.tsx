@@ -39,6 +39,11 @@ const Home: NextPage = () => {
           relevant LaTeX! The author makes no guarantees regarding the accuracy
           of the results, so use at your own risk.
         </p>
+        <p>
+          When doing multiplication, please use a "*" operator. It's not{" "}
+          <i>strictly</i> necessary, but in certain cases it can cause
+          catastrophically incorrect results.
+        </p>
         <input
           type="text"
           placeholder="Type your equation here"
@@ -93,10 +98,13 @@ const Home: NextPage = () => {
           </button>
         </div>
         <h2>Examples</h2>
+        <input type="text" disabled value="e^(x * y)" />
         <input type="text" disabled value="R_1 + R_2" />
         <input type="text" disabled value="R_1 + 1/(1/R_2 + 1/R_3)" />
         <input type="text" disabled value="P * V" />
         <input type="text" disabled value="x^2 + y^2 + z^2" />
+        <input type="text" disabled value="\alpha_{\beta_2} * \alpha_2" />
+        <input type="text" disabled value="\alpha * \beta/\gamma" />
       </main>
       <footer className={styles["footer"]}>Made with ❤️</footer>
     </div>
