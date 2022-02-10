@@ -60,7 +60,6 @@ function propagate(the_expr: string) {
   const symbol_list: any = new Set();
 
   node.traverse(function (node, path, parent) {
-    console.log(node);
     switch (node.type) {
       case "SymbolNode":
         if (
@@ -89,7 +88,6 @@ function propagate(the_expr: string) {
 
   let result = "";
   let idx = 0;
-  console.log(symbol_list);
   for (let symbol of symbol_list.keys()) {
     const d = derivative(expr, symbol);
     if (d.toString() == "0") {
