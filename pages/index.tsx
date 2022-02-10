@@ -6,6 +6,12 @@ import propagate from "util/math";
 import copy from "copy-to-clipboard";
 const globalAny: any = global;
 
+declare global {
+  interface Window {
+    MathJax: any;
+  }
+}
+
 const Home: NextPage = () => {
   const [equation, setEquation] = useState("");
   const [result, setResult] = useState("");
@@ -14,7 +20,10 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     setEquation(global.localStorage.getItem("equation") || "");
-    (global as any).window.MathJax.typeset();
+    window &&
+      window.MathJax &&
+      window.MathJax.typeset &&
+      window.MathJax.typeset();
     setCopied(false);
   }, [result]);
 
@@ -89,7 +98,10 @@ const Home: NextPage = () => {
           <button
             className={styles["small-button"]}
             onClick={() => {
-              (window as any).MathJax.typeset();
+              window &&
+                window.MathJax &&
+                window.MathJax.typeset &&
+                window.MathJax.typeset();
               setCopied(true);
               copy(result);
             }}
