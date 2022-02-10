@@ -45,8 +45,8 @@ const Home: NextPage = () => {
         <h1>Uncertainty Propagation</h1>
         <p>
           Quite possibly the <i>only</i> uncertainty calculator that outputs the
-          relevant LaTeX! The author makes no guarantees regarding the accuracy
-          of the results, so use at your own risk.
+          relevant LaTeX, with LaTeX input! The author makes no guarantees
+          regarding the accuracy of the results, so use at your own risk.
         </p>
         <p>
           When doing multiplication, please use a &quot;*&quot; operator.
