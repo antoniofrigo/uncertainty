@@ -40,9 +40,9 @@ const Home: NextPage = () => {
           of the results, so use at your own risk.
         </p>
         <p>
-          When doing multiplication, please use a "*" operator. It's not{" "}
-          <i>strictly</i> necessary, but in certain cases it can cause
-          catastrophically incorrect results.
+          When doing multiplication, please use a &quot;*&quot; operator.
+          It&apos;s not <i>strictly</i> necessary, but in certain cases it can
+          cause catastrophically incorrect results.
         </p>
         <input
           type="text"

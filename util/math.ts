@@ -9,7 +9,7 @@ import {
   SymbolNode,
 } from "mathjs";
 
-function getHash(idx) {
+function getHash(idx: number) {
   return "zqzqz" + String.fromCharCode(65 + idx);
 }
 
@@ -55,7 +55,7 @@ function parseTex(expr: string) {
 
 function propagate(the_expr: string) {
   let [expr, label_list] = parseTex(the_expr);
-  expr = simplify(expr).toString();
+  expr = simplify(expr as string).toString();
   const node = parse(expr);
   const symbol_list: any = new Set();
 
@@ -90,7 +90,7 @@ function propagate(the_expr: string) {
     idx++;
   }
 
-  for (const idx in label_list) {
+  for (const idx in label_list as any[]) {
     result = result.replaceAll(label_list[idx][1], label_list[idx][0]);
   }
 
