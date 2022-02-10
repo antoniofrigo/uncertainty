@@ -41,7 +41,7 @@ const Home: NextPage = () => {
         </p>
         <p>
           When doing multiplication, please use a &quot;*&quot; operator.
-          It&apos;s not <i>strictly</i> necessary, but in certain cases it can
+          It&apos;s not <i>strictly</i> necessary, but failing to do so can
           cause catastrophically incorrect results.
         </p>
         <input
