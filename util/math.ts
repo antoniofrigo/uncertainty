@@ -89,10 +89,10 @@ function propagate(the_expr: string) {
     }
     idx++;
   }
-
   for (const idx in label_list as any[]) {
     result = result.replaceAll(label_list[idx][1], label_list[idx][0]);
   }
+  result = result.replaceAll(/\\mathrm\{(.*?)\}/gm, " $1");
 
   result = "\\sqrt{" + result + "}";
   result = result.replaceAll("\\_", "_");
