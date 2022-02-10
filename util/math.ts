@@ -60,9 +60,25 @@ function propagate(the_expr: string) {
   const symbol_list: any = new Set();
 
   node.traverse(function (node, path, parent) {
+    console.log(node);
     switch (node.type) {
       case "SymbolNode":
-        if (node.name != "e") {
+        if (
+          node.name != "e" &&
+          node.name != "sin" &&
+          node.name != "cos" &&
+          node.name != "tan" &&
+          node.name != "csc" &&
+          node.name != "sec" &&
+          node.name != "cot" &&
+          node.name != "log" &&
+          node.name != "asin" &&
+          node.name != "acos" &&
+          node.name != "atan" &&
+          node.name != "asec" &&
+          node.name != "acsc" &&
+          node.name != "acot"
+        ) {
           symbol_list.add(node.name);
         }
         break;
@@ -73,6 +89,7 @@ function propagate(the_expr: string) {
 
   let result = "";
   let idx = 0;
+  console.log(symbol_list);
   for (let symbol of symbol_list.keys()) {
     const d = derivative(expr, symbol);
     if (d.toString() == "0") {
@@ -94,6 +111,9 @@ function propagate(the_expr: string) {
   }
   result = result.replaceAll(/\\mathrm\{(.*?)\}/gm, " $1");
 
+  if (result == "") {
+    return "\\text{Quantity is exact}";
+  }
   result = "\\sqrt{" + result + "}";
   result = result.replaceAll("\\_", "_");
   return result;
