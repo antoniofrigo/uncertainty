@@ -95,6 +95,8 @@ function propagate(the_expr: string) {
       continue;
     } else if (d.toString() == "1") {
       result += `\\sigma_{${symbol}}^2`;
+    } else if (d.toString().length == 1) {
+      result += `${d.toTex()}^2\\sigma_{${symbol}}^2`;
     } else {
       result += `\\left(${d.toTex()}\\right)^2\\sigma_{${symbol}}^2`;
     }
