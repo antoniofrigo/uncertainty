@@ -16,8 +16,8 @@ function getHash(idx: number) {
 function parseTex(expr: string) {
   let new_expr = expr;
   const label_list = [];
-  const first_regex = /\\[a-zA-Z0-9]*_{\\?[a-zA-Z0-9\\_]*}/gm;
-  const second_regex = /\\[a-zA-Z0-9]*_\\?[a-zA-Z0-9{}]*/gm;
+  const first_regex = /\\[a-zA-Z0-9]*_{\\?[a-zA-Z0-9\\{}_]*}/gm;
+  const second_regex = /\\?[a-zA-Z0-9]*_\\?[a-zA-Z0-9{}]*/gm;
   const third_regex = /\\[a-zA-Z0-9]*/gm;
 
   const label_set = new Set();

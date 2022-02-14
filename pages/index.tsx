@@ -61,6 +61,10 @@ const Home: NextPage = () => {
           It&apos;s not <i>strictly</i> necessary, but failing to do so can
           cause catastrophically incorrect results.
         </p>
+        <p>
+          Note that the resulting equation won't probably be <i>fully</i>{" "}
+          simplified, but it typically does a reasonable job.
+        </p>
         <input
           type="text"
           placeholder="Type your equation here"
@@ -125,6 +129,8 @@ const Home: NextPage = () => {
         <input type="text" disabled value="x^2 + y^2 + z^2" />
         <input type="text" disabled value="\alpha_{\beta_2} * \alpha_2" />
         <input type="text" disabled value="\alpha * \beta/\gamma" />
+        <input type="text" disabled value="log(x * y)" />
+        <input type="text" disabled value="V_\text{out}/V_\text{in}" />
       </main>
       <footer className={styles["footer"]}>Made with ❤️</footer>
     </div>
