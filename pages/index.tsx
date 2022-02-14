@@ -62,7 +62,7 @@ const Home: NextPage = () => {
           cause catastrophically incorrect results.
         </p>
         <p>
-          Note that the resulting equation won't probably be <i>fully</i>{" "}
+          Note that the resulting equation won&apos;t probably be <i>fully</i>{" "}
           simplified, but it typically does a reasonable job.
         </p>
         <input
