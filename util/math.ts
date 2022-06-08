@@ -9,16 +9,19 @@ import {
   SymbolNode,
 } from "mathjs";
 
+// "Hash" function that replaces a symbol with a string
+// so mathjs can parse it.
 function getHash(idx: number) {
   return "zqzqz" + String.fromCharCode(65 + idx);
 }
 
+// Finds all the LaTeX elements to escape (starts with backslash)
 function parseTex(expr: string) {
   let new_expr = expr;
   const label_list = [];
-  const first_regex = /\\[a-zA-Z0-9]*_{\\?[a-zA-Z0-9\\{}_]*}/gm;
-  const second_regex = /\\?[a-zA-Z0-9]*_\\?[a-zA-Z0-9{}]*/gm;
-  const third_regex = /\\[a-zA-Z0-9]*/gm;
+  const first_regex = /\\[a-zA-Z0-9]*_{\\?[a-zA-Z0-9\\{}_]*}/gm; // Handles \symbol_{symbol}
+  const second_regex = /\\?[a-zA-Z0-9]*_\\?[a-zA-Z0-9{}]*/gm; // Handles \symbol_\symbol
+  const third_regex = /\\[a-zA-Z0-9]*/gm; // Handles \symbol
 
   const label_set = new Set();
   let i = 0;
@@ -86,6 +89,7 @@ function propagate(the_expr: string) {
     }
   });
 
+  // Take partial derivatives and assemble result
   let result = "";
   let idx = 0;
   for (let symbol of symbol_list.keys()) {
