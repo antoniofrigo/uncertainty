@@ -42,11 +42,6 @@ const Home: NextPage = () => {
           async
           src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
         ></script>
-        <script
-          data-goatcounter="https://stats.uncertainty.afridge.io/count"
-          async
-          src="//stats.uncertainty.afridge.io/count.js"
-        ></script>
       </Head>
 
       <main className={styles["main"]}>
